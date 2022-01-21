@@ -18,9 +18,6 @@ public final class Main extends JavaPlugin {
         this.getServer().registerCommand(this, "forbuilder", new MainCommand(this));
         this.getServer().registerCommand(this, "speed", new SpeedCommand());
         this.getServer().registerCommand(this, "world", new WorldCommand(this));
-
-        // Register Event
-        this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
     }
 
     @Override
@@ -29,5 +26,8 @@ public final class Main extends JavaPlugin {
         for (final var name : this.getConfig().getStringList(WORLD_LIST)) {
             new WorldCreator(name).createWorld();
         }
+
+        // Register Event
+        this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
     }
 }
