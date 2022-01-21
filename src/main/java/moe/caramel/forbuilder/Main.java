@@ -1,5 +1,6 @@
 package moe.caramel.forbuilder;
 
+import moe.caramel.forbuilder.command.MainCommand;
 import moe.caramel.forbuilder.command.SpeedCommand;
 import moe.caramel.forbuilder.command.WorldCommand;
 import org.bukkit.WorldCreator;
@@ -12,6 +13,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         // Register Command
+        this.getServer().registerCommand(this, "forbuilder", new MainCommand(this));
         this.getServer().registerCommand(this, "speed", new SpeedCommand());
         this.getServer().registerCommand(this, "world", new WorldCommand(this));
     }
