@@ -1,0 +1,7 @@
+name: ForBuilder
+version: '${version}'
+main: moe.caramel.forbuilder.Main
+api-version: 1.17
+authors: [ LemonCaramel ]
+description: for Builder
+website: https://caramel.moe
