@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.mojang.brigadier.arguments.FloatArgumentType.floatArg;
 import static com.mojang.brigadier.arguments.FloatArgumentType.getFloat;
 
-public class SpeedCommand extends AbstractCommand {
+public final class SpeedCommand extends AbstractCommand {
 
     private static final float DEFAULT_WALK_SPEED = 0.2f;
     private static final float DEFAULT_FLY_SPEED = 0.1f;

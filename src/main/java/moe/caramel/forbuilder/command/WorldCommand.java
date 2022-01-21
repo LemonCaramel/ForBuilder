@@ -20,7 +20,7 @@ import static moe.caramel.daydream.brigadier.Arguments.DIMENSION;
 import static moe.caramel.forbuilder.Main.WORLD_LIST;
 
 
-public class WorldCommand extends AbstractCommand {
+public final class WorldCommand extends AbstractCommand {
 
     private static final String ARGUMENT_WORLD = "world";
     private final Plugin plugin;
