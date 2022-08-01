@@ -3,6 +3,7 @@ package moe.caramel.forbuilder.command;
 import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import moe.caramel.daydream.brigadier.AbstractCommand;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -18,10 +19,13 @@ import static com.mojang.brigadier.arguments.StringArgumentType.getString;
 import static com.mojang.brigadier.arguments.StringArgumentType.word;
 import static moe.caramel.daydream.brigadier.Arguments.DIMENSION;
 import static moe.caramel.forbuilder.Main.WORLD_LIST;
-
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.RED;
+import static net.kyori.adventure.text.format.TextDecoration.BOLD;
 
 public final class WorldCommand extends AbstractCommand {
 
+    private static final Component TITLE = text(" 월드 > ", RED, BOLD);
     private static final String ARGUMENT_WORLD = "world";
     private final Plugin plugin;
 
@@ -40,11 +44,11 @@ public final class WorldCommand extends AbstractCommand {
             final var name = getString(context, ARGUMENT_WORLD);
             // Check
             if (Bukkit.getWorld(name) != null) {
-                source.sendMessage("§c§l 월드 > §f이미 해당 이름의 세계가 존재합니다.");
+                source.sendMessage(text().append(TITLE, text("이미 해당 이름의 세계가 존재합니다.")));
                 return -1;
             }
 
-            source.sendMessage("§a§l 월드 > §f\"" + name + "\" 세계가 생성 중입니다.");
+            source.sendMessage(text().append(TITLE, text("\"" + name + "\" 세계가 생성 중입니다.")));
 
             // Creator
             final var creator = new WorldCreator(name);
@@ -77,20 +81,24 @@ public final class WorldCommand extends AbstractCommand {
             border.setSize(500);
 
             // Etc
-            source.sendMessage("§a§l 월드 > §f세계 생성이 완료되었습니다.");
+            source.sendMessage(text().append(TITLE, text("세계 생성이 완료되었습니다.")));
             if (source instanceof Player player) player.teleport(world.getSpawnLocation());
             return 0;
         })));
 
         // "move" Sub command
-        builder.then(this.literal("move").then(this.argument(ARGUMENT_WORLD, DIMENSION.get()).suggests(DIMENSION.getSuggestion()).executes(context -> {
-            final var world = DIMENSION.getData(context, ARGUMENT_WORLD);
-            final var source = context.getSource().getBukkitSender();
-            if (source instanceof Player player) {
-                player.teleport(world.getSpawnLocation());
-                player.sendMessage("§a§l 월드 > §f이동 되었습니다!");
-            } else source.sendMessage("§c§l 월드 > §f당신은 플레이어가 아닙니다!");
-            return 0;
-        })));
+        builder.then(this.literal("move")
+               .then(this.argument(ARGUMENT_WORLD, DIMENSION.get())
+               .suggests(DIMENSION.getSuggestion())
+               .executes(context -> {
+                   final var world = DIMENSION.getData(context, ARGUMENT_WORLD);
+                   final var source = context.getSource().getBukkitSender();
+                   if (source instanceof Player player) {
+                       player.teleport(world.getSpawnLocation());
+                       player.sendMessage(text().append(TITLE, text("이동 되었습니다!")));
+                   } else source.sendMessage(text().append(TITLE, text("당신은 플레이어가 아닙니다!")));
+                   return 0;
+               })
+       ));
     }
 }
