@@ -22,8 +22,8 @@ public final class MainCommand extends AbstractCommand {
 
         // "reload" Sub command
         builder.then(this.literal("reload").executes(context -> {
-            plugin.reloadConfig();
             context.getSource().getBukkitSender().sendMessage("§c§l 설정 > §f리로드가 완료되었습니다.");
+            this.plugin.reloadConfig();
             return 0;
         }));
     }

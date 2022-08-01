@@ -15,9 +15,9 @@ public final class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         // Register Command
-        this.getServer().registerCommand(this, "forbuilder", new MainCommand(this));
-        this.getServer().registerCommand(this, "speed", new SpeedCommand());
-        this.getServer().registerCommand(this, "world", new WorldCommand(this));
+        this.registerCommand("forbuilder", new MainCommand(this));
+        this.registerCommand("speed", new SpeedCommand());
+        this.registerCommand("world", new WorldCommand(this));
     }
 
     @Override

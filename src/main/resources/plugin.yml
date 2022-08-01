@@ -4,4 +4,4 @@ description: '${description}'
 main: moe.caramel.forbuilder.Main
 authors: [ LemonCaramel ]
 website: https://caramel.moe
-api-version: 1.17
+api-version: 1.18

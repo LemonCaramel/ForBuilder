@@ -8,11 +8,12 @@ allprojects {
     description = "for Builder"
 }
 
-val targetJavaVersion = 16
+val targetJavaVersion = 17
 java {
     val javaVersion: JavaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
+    toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
 }
 
 dependencies {
